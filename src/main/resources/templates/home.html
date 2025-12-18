@@ -1,0 +1,17 @@
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <title>EcoBank — Home</title>
+  <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+  <h1>EcoBank — Select Customer</h1>
+  <ul>
+    <li th:each="c : ${customers}">
+      <a href="#" th:href="@{/ui/customer/{id}(id=${c.id})}" th:text="${c.name}">Customer Name</a>
+    </li>
+  </ul>
+</body>
+</html>

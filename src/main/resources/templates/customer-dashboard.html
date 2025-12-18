@@ -1,0 +1,123 @@
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <title th:text="'EcoBank — ' + ${customer.name}"></title>
+  @{/styles.css}
+</head>
+<body>
+
+<header>
+  @{/ui}← Back</a>
+  <h1 th:text="${customer.name}">Customer Name</h1>
+  <div>
+    <span th:text="'Email: ' + ${customer.email}"></span> |
+    <span th:text="'Phone: ' + ${customer.phone}"></span> |
+    <span th:text="'Income: ₹' + ${customer.income}"></span>
+  </div>
+</header>
+
+<section>
+  <h2>Accounts</h2>
+  <table>
+    <thead>
+      <tr><th>Account No</th><th>Type</th><th>Balance (₹)</th></tr>
+    </thead>
+    <tbody>
+      <tr th:each="a : ${accounts}">
+        <td th:text="${a.accountNo}"></td>
+        <td th:text="${a.type}"></td>
+        <td th:text="${a.balance}"></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Add Opportunity</h2>
+  @{/ui/opportunities}
+    <!-- customerId hidden -->
+    <input type="hidden" th:field="*{customerId}" th:value="${customer.id}" />
+    <div>
+      <label>Product Id</label>
+      <input type="number" th:field="*{productId}" required />
+    </div>
+    <div>
+      <label>Assigned Staff</label>
+      <input type="text" th:field="*{assignedStaff}" required />
+    </div>
+    <div>
+      <label>Status</label>
+      <select th:field="*{status}">
+        <option value="NEW">NEW</option>
+        <option value="CONTACTED">CONTACTED</option>
+        <option value="PENDING">PENDING</option>
+        <option value="WON">WON</option>
+        <option value="FULFILLED">FULFILLED</option>
+        <option value="CLOSED">CLOSED</option>
+        <option value="LOST">LOST</option>
+      </select>
+    </div>
+    <button type="submit">Create</button>
+  </form>
+</section>
+
+<section>
+  <h2>Pending Opportunities</h2>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Product Id</th><th>Staff</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr th:each="o : ${pendingOpps}">
+        <td th:text="${o.id}"></td>
+        <td th:text="${o.productId}"></td>
+        <td th:text="${o.assignedStaff}"></td>
+        <td th:text="${o.status}"></td>
+        <td>
+          <!-- Update form inline -->
+          @{|/ui/opportunities/${o.id}/update|}
+            <input type="hidden" name="customerId" th:value="${customer.id}" />
+            <input type="text" name="assignedStaff" placeholder="New Staff" />
+            <select name="status">
+              <option value="">(no change)</option>
+              <option value="CONTACTED">CONTACTED</option>
+              <option value="PENDING">PENDING</option>
+              <option value="WON">WON</option>
+              <option value="FULFILLED">FULFILLED</option>
+              <option value="CLOSED">CLOSED</option>
+              <option value="LOST">LOST</option>
+            </select>
+            <button type="submit">Update</button>
+          </form>
+
+          @{|/ui/opportunities/${o.id}/delete|}
+            <input type="hidden" name="customerId" th:value="${customer.id}" />
+            <button type="submit" onclick="return confirm('Delete opportunity?')">Delete</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Fulfilled Opportunities</h2>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Product Id</th><th>Staff</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr th:each="o : ${fulfilledOpps}">
+        <td th:text="${o.id}"></td>
+        <td th:text="${o.productId}"></td>
+        <td th:text="${o.assignedStaff}"></td>
+        <td th:text="${o.status}"></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+

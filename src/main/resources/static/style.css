@@ -1,0 +1,12 @@
+
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
+h1, h2 { margin: 16px 0 8px; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0 16px; }
+th, td { border: 1px solid #ddd; padding: 8px; }
+th { background-color: #f5f5f5; text-align: left; }
+form { margin: 8px 0; }
+input, select { padding: 6px; margin-right: 6px; }
+button { padding: 6px 10px; }
+header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 16px; }
+
+nav a { margin-right: 12px; text-decoration: none; color: #007BFF; }
