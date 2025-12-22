@@ -7,7 +7,7 @@ import jakarta.validation.constraints.*;
 import java.time.*;
 
 @Entity
-public class transactions {
+public class Transactions {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
