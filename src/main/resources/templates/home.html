@@ -15,17 +15,21 @@
 </head>
 <body>
 
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <strong>EcoBank Portal</strong>
-    </div>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit" style="background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">
-                Logout
-            </button>
-        </form>
+    <div style="display: flex; justify-content: flex-end; padding: 10px; background-color: #f8f9fa; border-bottom: 1px solid #dee2e6;">
+        <div style="text-align: right;">
+            <div style="font-weight: bold; color: #333; margin-bottom: 5px;">
+                <span th:text="${#authentication.principal.attributes['name']}">Guest User</span>
+            </div>
+            
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.85rem;">
+                    Logout
+                </button>
+            </form>
+        </div>
     </div>
 
-<h1>EcoBank — Home</h1>
+<h1>EcoBanking — Home</h1>
 
     <!-- If there are no customers -->
     <div th:if="${#lists.isEmpty(customers)}" class="empty">
