@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account Details</title>
+    <meta charset="UTF-8">
+    <style>
+        .banner { padding: 8px; margin: 10px 0; border-radius: 4px; }
+        .banner.success { background: #e6ffed; color: #0a5; border: 1px solid #0a5; }
+        .banner.error   { background: #ffecec; color: #c00; border: 1px solid #c00; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+        th { background: #f7f7f7; }
+        .actions { margin: 12px 0; }
+    </style>
+</head>
+<body>
+
+    <!-- Back link -->
+    <p th:if="${account != null}">
+        <a href="#" th:href="@{/ui/customer/{id}(id=${account.customer.id})}">← Customer Dashboard</a>
+    </p>
+
+    <h2>Account Details</h2>
+
+    <!-- Flash messages -->
+    <div th:if="${message}" class="banner success" th:text="${message}"></div>
+    <div th:if="${error}" class="banner error" th:text="${error}"></div>
+
+    <!-- Account summary -->
+    <div th:if="${account}">
+        <p><strong>Account Number:</strong> <span th:text="${account.accountNo}">1234567890</span></p>
+        <p>
+            <span th:text="${account.type}">SAVINGS</span> ·
+            <span>INR</span> ·
+            <span>ACTIVE</span>
+        </p>
+        <p><strong>Balance:</strong>
+            <span th:text="${account.balance}">120,000.00</span>
+            <span>INR</span>
+        </p>
+    </div>
+
+    <!-- Generate Opportunities Button -->
+
+	<div class="actions" th:if="${account}">
+    <form th:action="@{/ui/account/{acc}/opportunities/generate(acc=${account.accountNo})}" method="post" style="display:inline;">
+        <button type="submit">Generate AI Opportunities</button>
+    </form>
+    <a href="#" th:href="@{/ui/account/{acc}/opportunity/new(acc=${account.accountNo})}">
+        <button type="button">Add Opportunity Manually</button>
+    </a>
+	</div>
+
+    <!-- Opportunities section -->
+    <h3>Opportunities</h3>
+    <div th:if="${#lists.isEmpty(opportunities)}">
+        <p>No opportunities yet.</p>
+    </div>
+	<table th:if="${!#lists.isEmpty(opportunities)}">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Product ID</th>
+				<th>Assigned Staff</th>
+				<th>Status</th>
+				<th>Actions</th> </tr>
+		</thead>
+		<tbody>
+			<tr th:each="opp : ${opportunities}">
+				<td th:text="${opp.id}">1</td>
+				<td th:text="${opp.productId}">2</td>
+				<td th:text="${opp.assignedStaff}">AUTO-AI</td>
+				<td th:text="${opp.status}">NEW</td>
+				<td>
+					<a href="#" th:href="@{/ui/account/{acc}/opportunity/edit/{oppId}(acc=${account.accountNo}, oppId=${opp.id})}">Edit</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+    <!-- Transactions section -->
+    <h3>Transactions</h3>
+    <table th:if="${transactions}">
+        <thead>
+        <tr>
+            <th>Date & Time</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Balance After</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="t : ${transactions}">
+            <td th:text="${t.createdAt}">19-Dec-2025 12:34</td>
+            <td th:text="${t.description}">ATM Withdrawal</td>
+            <td th:text="${t.amount}">-2,000.00</td>
+            <td >118,000.00</td>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

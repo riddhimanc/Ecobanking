@@ -1,0 +1,36 @@
+
+<!-- src/main/resources/templates/login.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Sign in</title>
+  <meta charset="UTF-8" />
+  <style>
+    body { font-family: system-ui, Segoe UI, Roboto, Arial; margin: 40px; }
+    .card { max-width: 420px; margin: 0 auto; border: 1px solid #ddd; border-radius: 6px; padding: 20px; }
+    .row { margin: 10px 0; }
+    .banner { padding: 8px; margin-bottom: 10px; border-radius: 4px; }
+    .error { background: #ffecec; color: #c00; border: 1px solid #c00; }
+    .success { background: #e6ffed; color: #0a5; border: 1px solid #0a5; }
+    a.button { display: inline-block; padding: 10px 14px; background: #4285F4; color: white; border-radius: 4px; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Sign in</h2>
+
+    <!-- Messages -->
+    <div th:if="${param.error}" class="banner error">Login failed.</div>
+    <div th:if="${param.logout}" class="banner success">You have been logged out.</div>
+
+    <!-- Google sign-in -->
+    <div class="row">
+      <a th:href="@{/oauth2/authorization/google}">
+        Sign in with Google
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

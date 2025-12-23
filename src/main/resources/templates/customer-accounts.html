@@ -1,0 +1,84 @@
+
+<!-- templates/customer-dashboard.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Dashboard</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+        .container { max-width: 1024px; margin: 24px auto; padding: 0 16px; }
+        h1 { margin-bottom: 8px; }
+        .muted { color: #666; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f5f5f5; text-align: left; }
+        .section-title { margin-top: 24px; font-size: 1.1rem; font-weight: 600; }
+        .error { color: #a00; margin-top: 12px; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Customer Dashboard</h1>
+
+    <!-- Error message (if customer not found) -->
+    <div th:if="${error}" class="error" th:text="${error}">Customer not found</div>
+
+    <!-- Customer details -->
+    <div th:if="${customer != null}">
+        <p>
+            <strong>Customer ID:</strong>
+            <span th:text="${customer.id}">123</span>
+        </p>
+        <p>
+            <strong>Name:</strong>
+            <span th:text="${customer.name}">Alice Gupta</span>
+        </p>
+        <p th:if="${customer.address}" class="muted">
+            <strong>Address:</strong>
+            <span th:text="${customer.address}">Delhi</span>
+        </p>
+        <!-- Add more fields if your Customer model has them -->
+        <!-- <p><strong>Email:</strong> <span th:text="${customer.email}">alice@example.com</span></p> -->
+        <!-- <p><strong>Income:</strong> <span th:text="${customer.income}">1200000</span></p> -->
+    </div>
+
+    <!-- Accounts list -->
+    <div class="section-title">Associated Accounts</div>
+
+    <div th:if="${#lists.isEmpty(accounts)}" class="muted">
+        No accounts found for this customer.
+    </div>
+
+    <table th:if="${!#lists.isEmpty(accounts)}">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Account Number</th>
+            <th>Type</th>
+            <th>Balance</th>
+            <th>Currency</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="acct, idx : ${accounts}">
+            <td th:text="${idx.index + 1}">1</td>
+            <td>
+                <a href="#" th:href="@{|/ui/account/${acct.accountNo}|}">
+                  <span th:text="${acct.accountNo}"></span>   
+                </a>
+            </td>
+            <td th:text="${acct.type}">SAVINGS</td>
+            <!-- Use numbers utility to format if balance is numeric -->
+            <td th:text="${#numbers.formatDecimal(acct.balance, 0, 'COMMA', 2, 'POINT')}">120,000.00</td>
+            <td>INR</td>
+            <td>ACTIVE</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

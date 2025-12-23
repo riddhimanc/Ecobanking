@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Opportunity</title>
+    <style>
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; }
+        input, select { width: 300px; padding: 5px; }
+        .btn-save { background: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2 th:text="${opportunity.id == null ? 'Add New Opportunity' : 'Edit Opportunity'}">Manage Opportunity</h2>
+    
+    <form th:action="@{/ui/account/{acc}/opportunity/save(acc=${accountNumber})}" method="post">
+        <input type="hidden" name="id" th:value="${opportunity.id}" />
+        
+    <div class="form-group">
+            <label>Select Product:</label>
+            <select name="productId" required>
+                <option value="" disabled th:selected="${opportunity.productId == null}">-- Select a Product --</option>
+                <option th:each="prod : ${allProducts}" 
+                        th:value="${prod.id}" 
+                        th:text="${prod.productCode + ' - ' + prod.name}"
+                        th:selected="${prod.id == opportunity.productId}">
+                    Product Code - Name
+                </option>
+            </select>
+    </div>
+
+        <div class="form-group">
+            <label>Assigned Staff:</label>
+            <input type="text" name="assignedStaff" th:value="${opportunity.assignedStaff}" required />
+        </div>
+
+        <div class="form-group">
+            <label>Status:</label>
+            <select name="status">
+                <option value="NEW" th:selected="${opportunity.status == 'NEW'}">NEW</option>
+                <option value="CONTACTED" th:selected="${opportunity.status == 'CONTACTED'}">CONTACTED</option>
+                <option value="PENDING" th:selected="${opportunity.status == 'PENDING'}">PENDING</option>
+                <option value="WON" th:selected="${opportunity.status == 'WON'}">WON</option>
+                <option value="CLOSED" th:selected="${opportunity.status == 'CLOSED'}">CLOSED</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-save">Save Opportunity</button>
+        <a href="#" th:href="@{/ui/account/{acc}(acc=${accountNumber})}">Cancel</a>
+    </form>
+</body>
+</html>

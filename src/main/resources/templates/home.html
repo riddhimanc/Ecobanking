@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>EcoBanking — Home</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+        h1, h2 { margin: 0.4rem 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 12px; }
+        .card { border: 1px solid #ddd; border-radius: 6px; padding: 12px; }
+        .card h3 { margin: 0 0 8px 0; font-size: 1.05rem; }
+        .empty { color: #777; margin-top: 16px; }
+    </style>
+</head>
+<body>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <strong>EcoBank Portal</strong>
+    </div>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" style="background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">
+                Logout
+            </button>
+        </form>
+    </div>
+
+<h1>EcoBank — Home</h1>
+
+    <!-- If there are no customers -->
+    <div th:if="${#lists.isEmpty(customers)}" class="empty">
+        <p>No customers found.</p>
+    </div>
+
+    <!-- Customers grid -->
+    <div th:if="${customers != null and !customers.isEmpty()}" class="grid">
+        <div class="card" th:each="c : ${customers}">
+            <h3 th:text="${c.name}">Customer Name</h3> 
+            <p>
+                <strong>ID:</strong> <span th:text="${c.id}">1</span><br/>
+                <strong>Email:</strong> <span th:text="${c.email}">email@example.com</span><br/>
+                <strong>Phone:</strong> <span th:text="${c.phone}">00000</span>
+            </p>
+            <p>
+                <a href="#" th:href="@{/ui/customer/{customerId}/accounts(customerId=${c.id})}">
+                    View Accounts →
+                </a>
+            </p>
+        </div>
+    </div>
+    <!-- Pagination controls -->
+
+    <div th:if="${totalPages > 1}" style="margin-top: 20px; text-align: center;">
+        <nav>
+            <ul style="display: inline-flex; list-style: none; padding: 0; gap: 10px; align-items: center;">
+                <li>
+                    <a href="#" th:if="${currentPage > 0}" th:href="@{/ui(page=${currentPage - 1})}" 
+                    style="text-decoration: none; padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px;">« Previous</a>
+                    <span th:if="${currentPage == 0}" style="color: #ccc; padding: 5px 10px;">« Previous</span>
+                </li>
+
+                <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+                    <a href="#" th:href="@{/ui(page=${i})}" 
+                    th:text="${i + 1}"
+                    th:style="${currentPage == i ? 'font-weight: bold; background: #eee; padding: 5px 10px; border-radius: 4px;' : 'padding: 5px 10px; text-decoration: none;'}">1</a>
+                </li>
+
+                <li>
+                    <a href="#" th:if="${currentPage + 1 < totalPages}" th:href="@{/ui(page=${currentPage + 1})}" 
+                    style="text-decoration: none; padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px;">Next »</a>
+                    <span th:if="${currentPage + 1 == totalPages}" style="color: #ccc; padding: 5px 10px;">Next »</span>
+                </li>
+            </ul>
+        </nav>
+        <p style="font-size: 0.85rem; color: #666; margin-top: 10px;">
+            Page <span th:text="${currentPage + 1}">1</span> of <span th:text="${totalPages}">10</span> 
+            (<span th:text="${totalItems}">100</span> total customers)
+        </p>
+    </div>
+    <div th:if="${customers == null or customers.isEmpty()}" class="empty">
+            <p>No customers found on this page.</p>
+    </div>
+
+</body>
+</html>

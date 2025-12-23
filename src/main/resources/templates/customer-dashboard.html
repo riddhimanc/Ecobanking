@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Dashboard</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { margin-bottom: 10px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 15px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f7f7f7; }
+        .back-link { margin-bottom: 15px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <!-- Back to Home -->
+    <p class="back-link">
+        <a href="#" th:href="@{/ui}">← Home</a>
+    </p>
+
+    <!-- Customer Info -->
+    <h1 th:text="'Customer: ' + ${customer.Name}">Customer Name</h1>
+    <p>
+        <strong>ID:</strong> <span th:text="${customer.id}">1</span><br/>
+        <strong>Email:</strong> <span th:text="${customer.email}">john.doe@example.com</span><br/>
+        <strong>Phone:</strong> <span th:text="${customer.phone}">99999-99999</span>
+    </p>
+
+    <!-- Accounts Table -->
+    <h2>Accounts</h2>
+    <div th:if="${#lists.isEmpty(accounts)}">
+        <p>No accounts found for this customer.</p>
+    </div>
+    <table th:if="${!#lists.isEmpty(accounts)}">
+        <thead>
+        <tr>
+            <th>Account Number</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Balance</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="acc : ${accounts}">
+            <td th:text="${acc.accountNo}">1234567890</td>
+            <td th:text="${acc.type}">SAVINGS</td>
+            <td>ACTIVE</td>
+            <td th:text="${acc.balance}">120000.00</td>
+            <td>
+                <a href="#" th:href="@{/ui/account/{accNo}(accNo=${acc.accountNo})}">
+                    View Details →
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
