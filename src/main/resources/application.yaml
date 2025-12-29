@@ -4,7 +4,7 @@ spring:
     name: core
 
   datasource:
-    url: jdbc:h2:file:~/data/ecobank;AUTO_SERVER=TRUE
+    url: jdbc:h2:mem:ecobank;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password: ""
@@ -12,6 +12,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      defer-datasource-initialization: true
     show-sql: true
     properties:
       hibernate.format_sql: true
