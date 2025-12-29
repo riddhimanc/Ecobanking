@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Manage Opportunity — EcoBanking</title>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-indigo-950 min-h-screen text-white font-['Inter'] flex items-center justify-center p-6">
+
+    <div class="w-full max-w-xl">
+        <div class="bg-white/5 backdrop-blur-2xl border border-white/10 p-8 lg:p-12 rounded-[2.5rem] shadow-2xl">
+            
+            <header class="mb-10 text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight mb-2" 
+                    th:text="${opportunity.id == null ? 'Add New Opportunity' : 'Edit Opportunity'}">
+                    Manage Opportunity
+                </h2>
+                <p class="text-slate-400 text-sm">Configure product assignment and status for Account <span class="text-emerald-400 font-mono" th:text="${accountNumber}">000</span></p>
+            </header>
+            
+            <form th:action="@{/ui/account/{acc}/opportunity/save(acc=${accountNumber})}" method="post" class="space-y-6">
+                <input type="hidden" name="id" th:value="${opportunity.id}" />
+                
+                <div class="space-y-2">
+                    <label class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 ml-1">Select Product</label>
+                    <div class="relative">
+                        <select name="productId" required 
+                                class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white appearance-none focus:outline-none focus:border-emerald-500/50 transition-colors cursor-pointer">
+                            <option value="" disabled th:selected="${opportunity.productId == null}" class="bg-slate-900">-- Choose a Product --</option>
+                            <option th:each="prod : ${allProducts}" 
+                                    th:value="${prod.id}" 
+                                    th:text="${prod.productCode + ' - ' + prod.name}"
+                                    th:selected="${prod.id == opportunity.productId}"
+                                    class="bg-slate-900">
+                                Product Code - Name
+                            </option>
+                        </select>
+                        <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 ml-1">Assigned Staff</label>
+                    <input type="text" name="assignedStaff" th:value="${opportunity.assignedStaff}" required 
+                           placeholder="Enter staff name or ID"
+                           class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-emerald-500/50 transition-colors" />
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 ml-1">Opportunity Status</label>
+                    <div class="relative">
+                        <select name="status" 
+                                class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-white appearance-none focus:outline-none focus:border-emerald-500/50 transition-colors cursor-pointer">
+                            <option value="NEW" th:selected="${opportunity.status == 'NEW'}" class="bg-slate-900">NEW</option>
+                            <option value="CONTACTED" th:selected="${opportunity.status == 'CONTACTED'}" class="bg-slate-900">CONTACTED</option>
+                            <option value="PENDING" th:selected="${opportunity.status == 'PENDING'}" class="bg-slate-900">PENDING</option>
+                            <option value="WON" th:selected="${opportunity.status == 'WON'}" class="bg-slate-900">WON</option>
+                            <option value="CLOSED" th:selected="${opportunity.status == 'CLOSED'}" class="bg-slate-900">CLOSED</option>
+                        </select>
+                        <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 flex flex-col gap-4">
+                    <button type="submit" 
+                            class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 rounded-2xl transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        Save Opportunity
+                    </button>
+                    <a th:href="@{/ui/account/{acc}(acc=${accountNumber})}" 
+                       class="w-full text-center text-slate-400 hover:text-white font-medium py-2 transition-colors">
+                        Cancel and Go Back
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

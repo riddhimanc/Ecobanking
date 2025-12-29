@@ -1,0 +1,48 @@
+
+spring:
+  application:
+    name: core
+
+  datasource:
+    url: jdbc:h2:file:~/data/ecobank;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  ai:
+    openai:
+      api-key: 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   # DO NOT hard-code keys; use env var
+      audio:
+        speech:
+          enabled: false           # disable speech auto-config (not needed now)
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: "138775126682-uau5nirifb773eel06drjfk0vkmmas38.apps.googleusercontent.com"
+            client-secret: "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"
+            scope:
+              - openid
+              - email
+              - profile
+
+server:
+  port: 8080
+
+# For local dev only—open CORS to React app
+cors:
+  allowed-origins: http://localhost:5173,http://localhost:3000
