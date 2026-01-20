@@ -1,0 +1,53 @@
+<main class="customers-page">
+
+  <header class="page-header">
+    <h2>Customer Directory</h2>
+    <p>
+      Search and manage customer profiles and their associated bank accounts.
+    </p>
+  </header>
+
+  <!-- EMPTY STATE -->
+  <div *ngIf="customers.length === 0" class="empty-state">
+    <div class="empty-icon">👤</div>
+    <h3>No Customers Found</h3>
+    <p>No customer records are available in the system.</p>
+  </div>
+
+  <!-- CUSTOMER GRID -->
+  <div class="customer-grid" *ngIf="customers.length > 0">
+
+    <div
+      class="customer-card"
+      *ngFor="let c of customers">
+
+      <div class="card-header">
+        <div class="avatar">
+          {{ c.name.charAt(0) }}
+        </div>
+
+        <span class="customer-id">
+          ID {{ c.id }}
+        </span>
+      </div>
+
+      <h3 class="customer-name">
+        {{ c.name }}
+      </h3>
+
+      <div class="customer-meta">
+        <div>{{ c.email }}</div>
+        <div>{{ c.phone }}</div>
+      </div>
+
+      <button
+        class="primary-btn"
+        (click)="openCustomer(c.id)">
+        View Accounts →
+      </button>
+
+    </div>
+
+  </div>
+
+</main>

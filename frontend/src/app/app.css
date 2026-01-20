@@ -1,0 +1,21 @@
+/* ROOT LAYOUT */
+.app-root {
+  min-height: 100vh;
+  background-color: #f8fafc; /* light gray banking background */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0f172a;
+}
+
+/* CONTENT AREA */
+.app-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* MOBILE PADDING */
+@media (max-width: 768px) {
+  .app-content {
+    padding: 20px 16px;
+  }
+}

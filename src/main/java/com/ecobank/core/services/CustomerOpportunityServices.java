@@ -3,6 +3,7 @@ package com.ecobank.core.services;
 
 import com.ecobank.core.domain.CustomerOpportunityRepository;
 import com.ecobank.core.domain.CustomerRepository;
+import com.ecobank.core.domain.OpportunityDTO;
 import com.ecobank.core.domain.ProductRepository;
 import com.ecobank.core.domain.AiOpportunitySuggestionDTO;
 
@@ -437,5 +438,28 @@ public class CustomerOpportunityServices {
             map.putIfAbsent(key, s);
         }
         return new ArrayList<>(map.values());
+    }
+
+    // ✅ DTO version (for Angular / REST)
+    public List<OpportunityDTO> getOpportunitiesByCustomerDTO(Long customerId) {
+        return opps.findByCustomer_Id(customerId)
+            .stream()
+            .map(o -> {
+
+                String productName = productRepository
+                    .findById(o.getProductId())
+                    .map(p -> p.getName())
+                    .orElse("Unknown Product");
+
+                return new OpportunityDTO(
+                    o.getId(),
+                    o.getCustomer().getId(),
+                    o.getProductId(),
+                    productName,          // NOW AVAILABLE
+                    o.getAssignedStaff(),
+                    o.getStatus()
+                );
+            })
+            .toList();
     }
 }

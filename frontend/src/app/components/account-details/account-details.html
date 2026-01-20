@@ -1,0 +1,119 @@
+<main class="account-page">
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <button class="back-link" (click)="goBack()">
+      ← Back to Dashboard
+    </button>
+    <h1>Account Details</h1>
+  </header>
+
+  <!-- ACCOUNT SUMMARY -->
+  <section *ngIf="account" class="account-card">
+
+    <div class="account-info">
+      <label>Account Number</label>
+      <p class="mono big">{{ account.accountNo }}</p>
+
+      <div class="badges">
+        <span class="badge type">{{ account.type }}</span>
+        <span class="badge status">Active</span>
+      </div>
+    </div>
+
+    <div class="balance">
+      <label>Available Balance</label>
+      <p class="amount">
+        ₹{{ account.balance | number:'1.2-2' }}
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+
+    <button class="btn primary" (click)="generate()">
+      ⚡ Generate AI Opportunities
+    </button>
+
+    <button class="btn secondary"
+            (click)="addManually()">
+      ➕ Add Manually
+    </button>
+
+  </div>
+
+  <!-- OPPORTUNITIES -->
+  <section class="section">
+    <h2>
+      AI Opportunities
+      <span class="count">{{ opportunities.length }}</span>
+    </h2>
+
+    <div *ngIf="opportunities.length === 0" class="empty">
+      No opportunities analyzed yet.
+    </div>
+
+    <div *ngIf="opportunities.length > 0" class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Staff</th>
+            <th>Status</th>
+            <th class="right">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let opp of opportunities">
+            <td class="mono">{{ opp.id }}</td>
+            <td class="highlight">{{ opp.productId }}</td>
+            <td>{{ opp.assignedStaff }}</td>
+            <td>
+              <span class="badge soft">{{ opp.status }}</span>
+            </td>
+            <td class="right">
+              <button class="link"
+                      (click)="editOpportunity(opp.id)">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TRANSACTIONS -->
+  <section *ngIf="transactions.length" class="section">
+    <h2>Recent Activity</h2>
+
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Date & Time</th>
+            <th>Description</th>
+            <th class="right">Amount</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let t of transactions">
+            <td class="muted">{{ t.createdAt }}</td>
+            <td>{{ t.description }}</td>
+            <td class="right mono"
+                [class.positive]="t.amount > 0"
+                [class.negative]="t.amount < 0">
+              {{ t.amount }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>

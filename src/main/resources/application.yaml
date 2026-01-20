@@ -45,4 +45,4 @@ server:
 
 # For local dev only—open CORS to React app
 cors:
-  allowed-origins: http://localhost:5173,http://localhost:3000
+  allowed-origins: http://localhost:5173,http://localhost:3000,http://localhost:4200

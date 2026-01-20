@@ -6,6 +6,8 @@ import jakarta.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -30,10 +32,12 @@ public class Customer {
 
   // Bidirectional link to accounts (optional)
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
   private List<Account> accounts = new ArrayList<>();
 
   // Bidirectional link to opportunities (optional)
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
   private List<CustomerOpportunity> opportunities = new ArrayList<>();
 
   // ----- getters & setters -----

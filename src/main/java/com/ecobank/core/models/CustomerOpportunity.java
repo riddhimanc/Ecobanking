@@ -1,6 +1,8 @@
 
 package com.ecobank.core.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -14,6 +16,7 @@ public class CustomerOpportunity {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "customer_id", nullable = false)
+  @JsonIgnore
   private Customer customer;   // <-- correct association to Customer entity
 
   // Using FK only for Product to avoid missing Product class for now.

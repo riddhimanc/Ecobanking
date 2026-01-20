@@ -1,0 +1,179 @@
+.customer-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.dashboard-header {
+  margin-bottom: 32px;
+}
+
+.dashboard-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.back-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+/* CUSTOMER CARD */
+.customer-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  margin-bottom: 40px;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #22c55e, #06b6d4);
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.customer-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  flex: 1;
+}
+
+.customer-info label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #64748b;
+}
+
+.customer-info p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.muted {
+  color: #475569;
+}
+
+.mono {
+  font-family: monospace;
+}
+
+/* ACCOUNTS HEADER */
+.accounts-header {
+  margin-bottom: 16px;
+}
+
+.accounts-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.count {
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  margin-left: 8px;
+}
+
+/* EMPTY */
+.empty-state {
+  background: #ffffff;
+  border: 2px dashed #e2e8f0;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  color: #64748b;
+}
+
+/* TABLE */
+.table-wrapper {
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.accounts-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.accounts-table thead {
+  background: #f8fafc;
+}
+
+.accounts-table th {
+  text-align: left;
+  padding: 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+}
+
+.accounts-table td {
+  padding: 16px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+/* BADGES */
+.badge {
+  background: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+}
+
+/* STATUS */
+.status {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* LINK BUTTON */
+.link-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}

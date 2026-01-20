@@ -1,0 +1,100 @@
+<main class="customer-dashboard">
+
+  <!-- HEADER -->
+  <header class="dashboard-header">
+    <button class="back-link" (click)="goBackToDirectory()">
+      ← Back to Customer Directory
+    </button>
+
+    <h1>Customer Dashboard</h1>
+  </header>
+
+  <!-- CUSTOMER INFO CARD -->
+  <section *ngIf="customer" class="customer-card">
+
+    <div class="avatar">
+      {{ customer.name?.charAt(0) }}
+    </div>
+
+    <div class="customer-info">
+      <div>
+        <label>Full Name</label>
+        <p>{{ customer.name }}</p>
+      </div>
+
+      <div>
+        <label>Customer ID</label>
+        <p class="mono">{{ customer.id }}</p>
+      </div>
+
+      <div *ngIf="customer.address">
+        <label>Primary Address</label>
+        <p class="muted">{{ customer.address }}</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ACCOUNTS HEADER -->
+  <div class="accounts-header">
+    <h2>
+      Associated Accounts
+      <span class="count">{{ accounts.length }}</span>
+    </h2>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div *ngIf="accounts.length === 0" class="empty-state">
+    No active accounts found for this customer.
+  </div>
+
+  <!-- ACCOUNTS TABLE -->
+  <div *ngIf="accounts.length > 0" class="table-wrapper">
+
+    <table class="accounts-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Account Number</th>
+          <th>Type</th>
+          <th class="right">Balance (INR)</th>
+          <th class="center">Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let acct of accounts; index as i">
+
+          <td class="mono">{{ i + 1 }}</td>
+
+          <td>
+            <button
+              class="link-btn"
+              (click)="openAccount(acct.accountNo)">
+              {{ acct.accountNo }}
+            </button>
+          </td>
+
+          <td>
+            <span class="badge">
+              {{ acct.type }}
+            </span>
+          </td>
+
+          <td class="right mono">
+            {{ acct.balance | number:'1.2-2' }}
+          </td>
+
+          <td class="center">
+            <span class="status active">
+              Active
+            </span>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</main>

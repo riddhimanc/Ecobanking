@@ -1,0 +1,84 @@
+<main class="opportunity-page">
+
+  <div class="form-container">
+
+    <!-- HEADER -->
+    <header class="form-header">
+      <h2>{{ isEdit ? 'Edit Opportunity' : 'Add New Opportunity' }}</h2>
+      <p>
+        Configure opportunity for account
+        <span class="mono">{{ accountNo }}</span>
+      </p>
+    </header>
+
+    <!-- FORM -->
+    <form (ngSubmit)="save()">
+
+      <!-- PRODUCT -->
+      <div class="form-group">
+        <label>Select Product</label>
+
+        <select
+          name="productId"
+          [(ngModel)]="opportunity.productId"
+          required>
+
+          <option [ngValue]="null" disabled>
+            -- Choose a Product --
+          </option>
+
+          <option *ngFor="let p of products"
+                  [ngValue]="p.id">
+            {{ p.productCode }} — {{ p.name }}
+          </option>
+
+        </select>
+      </div>
+
+      <!-- STAFF -->
+      <div class="form-group">
+        <label>Assigned Staff</label>
+
+        <input
+          type="text"
+          name="assignedStaff"
+          [(ngModel)]="opportunity.assignedStaff"
+          placeholder="Enter staff name or ID"
+          required />
+      </div>
+
+      <!-- STATUS -->
+      <div class="form-group">
+        <label>Status</label>
+
+        <select
+          name="status"
+          [(ngModel)]="opportunity.status">
+
+          <option value="NEW">NEW</option>
+          <option value="CONTACTED">CONTACTED</option>
+          <option value="PENDING">PENDING</option>
+          <option value="WON">WON</option>
+          <option value="CLOSED">CLOSED</option>
+
+        </select>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="form-actions">
+        <button type="submit" class="btn primary">
+          💾 Save Opportunity
+        </button>
+
+        <button type="button"
+                class="btn ghost"
+                (click)="cancel()">
+          Cancel & Go Back
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</main>

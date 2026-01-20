@@ -1,0 +1,201 @@
+.account-page {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* HEADER */
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.back-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+/* ACCOUNT CARD */
+.account-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  margin-bottom: 32px;
+}
+
+.account-info label,
+.balance label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #64748b;
+}
+
+.big {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.amount {
+  font-size: 40px;
+  font-weight: 800;
+  color: #16a34a;
+}
+
+.mono {
+  font-family: monospace;
+}
+
+/* BADGES */
+.badges {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.badge.type {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge.status {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge.soft {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.btn {
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #22c55e;
+  color: #052e16;
+}
+
+.btn.secondary {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+/* SECTIONS */
+.section {
+  margin-bottom: 48px;
+}
+
+.section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.count {
+  background: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+/* TABLE */
+.table-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #f8fafc;
+}
+
+th, td {
+  padding: 14px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #64748b;
+}
+
+.right {
+  text-align: right;
+}
+
+.highlight {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* TRANSACTIONS */
+.muted {
+  color: #64748b;
+}
+
+.positive {
+  color: #16a34a;
+}
+
+.negative {
+  color: #dc2626;
+}
+
+/* EMPTY */
+.empty {
+  padding: 32px;
+  text-align: center;
+  color: #64748b;
+  border: 2px dashed #e2e8f0;
+  border-radius: 16px;
+}

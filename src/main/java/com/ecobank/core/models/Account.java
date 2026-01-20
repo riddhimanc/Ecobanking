@@ -1,6 +1,8 @@
 
 package com.ecobank.core.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -25,6 +27,7 @@ public class Account {
 
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   @JoinColumn(name = "customer_id", nullable = false)
+  @JsonIgnore
   private Customer customer;
 
   // ----- getters & setters -----
