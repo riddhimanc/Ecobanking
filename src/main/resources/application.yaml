@@ -4,7 +4,7 @@ spring:
     name: core
 
   datasource:
-    url: jdbc:h2:file:~/data/ecobank;AUTO_SERVER=TRUE
+    url: jdbc:h2:mem:ecobank;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password: ""
@@ -12,6 +12,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      defer-datasource-initialization: true
     show-sql: true
     properties:
       hibernate.format_sql: true
@@ -33,8 +34,8 @@ spring:
       client:
         registration:
           google:
-            client-id: "138775126682-uau5nirifb773eel06drjfk0vkmmas38.apps.googleusercontent.com"
-            client-secret: "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"
+            client-id:   "218700452912-vedrd1t3g154p52t4qij7pdj7ctbcaqn.apps.googleusercontent.com"
+            client-secret: "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"
             scope:
               - openid
               - email
